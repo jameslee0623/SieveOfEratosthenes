@@ -12,19 +12,20 @@
 #include <stdbool.h>
 
 int main(int argc, char **argv) {
-    unsigned long int     top_value = 1000000000; // N
-    unsigned long int     count     = top_value - 1; // pi(N)
-    bool     *array    = calloc( top_value + 1, sizeof(bool));
-    unsigned long int     i, prime, multiple;
-    unsigned long int     AddCount= 0; // A(N)
-    unsigned long int     MulCount= 0; // M(N)
-    clock_t t;
+    unsigned long int top_value = 1000000000; // N, the value you want to find primes up to. change me.
     
-    /* mark each int as potentially prime                                    */
+    unsigned long int count     = top_value - 1; // pi(N), number of primes up to N.
+    unsigned long int i, prime, multiple;
+    unsigned long int AddCount= 0; // A(N)
+    unsigned long int MulCount= 0; // M(N)
+    bool              *array    = calloc(top_value + 1, sizeof(bool));
+    clock_t           t;
+    
+    // mark each bool as potentially prime
     for (i=2; i <= top_value; ++i)
         array[i] = 1;
     t = clock(); // strat timeing
-    /* for each starting prime, mark its every multiple as non-prime         */
+    // for each starting prime, mark its every multiple as non-prime
     for (prime = 2; prime <= sqrt(top_value); prime++){
         AddCount++;
         if (array[prime]){
@@ -36,13 +37,13 @@ int main(int argc, char **argv) {
                     --count;
                 }
             }
-            AddCount--; // the first time is multiple.
+            AddCount--; // the first time is multiplicative.
         }
     }
-    AddCount--; // the first time assing 2.
+    AddCount--; // the first time is assing 2.
     t=clock()-t; //end of timeing
-    /* Now that we have marked all multiples of primes as non-prime, print   */
-    /* the remaining numbers that fell through the sieve, and are thus prime */
+    // Now that we have marked all multiples of primes as non-prime, print
+    //the remaining numbers that fell through the sieve, and are thus prime
     /*
     for (i=2; i <= top_value; ++i)
     {
