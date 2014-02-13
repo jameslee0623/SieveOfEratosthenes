@@ -16,8 +16,8 @@ int main(int argc, char **argv) {
     
     unsigned long int count     = top_value - 1; // pi(N), number of primes up to N.
     unsigned long int i, prime, multiple;
-    unsigned long int AddCount= 0; // A(N)
-    unsigned long int MulCount= 0; // M(N)
+    unsigned long int AddCount= 0; // A(N), number of addition operations.
+    unsigned long int MulCount= 0; // M(N), number of multiplication operations.
     bool              *array    = calloc(top_value + 1, sizeof(bool));
     clock_t           t;
     
